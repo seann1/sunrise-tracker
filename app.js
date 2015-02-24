@@ -32,12 +32,12 @@ app.controller('MainCtrl', [
 											    		dataType: "JSONP",
 											    		success: function(data) {
 											    			$("#sunrises").append("<div class='sunrise sunrise" + i + "'>" + data.results.sunrise + "</div>");
+											    			i += 1;
 											    			return data;
 											    		}
 														}); //end of api call
 			   		console.log(response);
 						startDateMilli += 86400000;
-						i += 1;
 			   	} //end of while loop
   			}
 			});
