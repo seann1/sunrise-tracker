@@ -22,20 +22,22 @@ app.controller('MainCtrl', [
   			{
 
    		//make api call inside of call to google maps api
+   			var i = 0;
 	   			while (startDateMilli <= endDateMilli) {
 
 	   				var currentDate = new Date(startDateMilli);
-	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lat() + "&lng=" + results[0].geometry.location.lng() + "&date=" + currentDate + "&callback=mycallback";
+	 					var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lng() + "&lng=" + results[0].geometry.location.lat() + "&date=" + currentDate + "&callback=mycallback";
 			   		var response = $.ajax({
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			$("#sunrise").append(data.results.sunrise);
+											    			$("#sunrises").append("<div class='sunrise sunrise" + i + "'>" + data.results.sunrise + "</div>");
 											    			return data;
 											    		}
 														}); //end of api call
-			   		console.log(response)
+			   		console.log(response);
 						startDateMilli += 86400000;
+						i += 1;
 			   	} //end of while loop
   			}
 			});
