@@ -10,13 +10,18 @@ app.controller('MainCtrl', [
 			var address = $scope.address + ", " + $scope.city + ", " + $scope.state;
 			address = address.toString();
 
+			var startDate = $scope.startDate;
+			var startDateMilli = new Date($scope.startDate).getTime();
+
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode( { 'address': address}, function(results, status) {
   			if (status == google.maps.GeocoderStatus.OK)
   		{
 
+  			console.log(startDateMilli);
+
    		//make api call inside of call to google maps api
-   		var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lat() + "&lng=" + results[0].geometry.location.lng() + "&callback=mycallback"
+   		var sunriseurl = "http://api.sunrise-sunset.org/json?lat=" + results[0].geometry.location.lat() + "&lng=" + results[0].geometry.location.lng() + "&date=" + startDate + "&callback=mycallback"
    		$.ajax({
     		url: sunriseurl,
     		dataType: "JSONP",
