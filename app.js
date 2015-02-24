@@ -30,8 +30,9 @@ app.controller('MainCtrl', [
 											    		url: sunriseurl,
 											    		dataType: "JSONP",
 											    		success: function(data) {
-											    			return data.results;
-											    		} 	//end of success function
+											    			$("#sunrise").append(data.results.sunrise);
+											    			return data;
+											    		}
 														}); //end of api call
 			   		console.log(response)
 						startDateMilli += 86400000;
